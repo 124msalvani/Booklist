@@ -18,12 +18,43 @@ link.addEventListener("click", function(e){
 
 });
     
+const list = document.querySelector("#book-list ul");
+list.addEventListener("click",function(e){
+    if(e.target.className == "delete"){
+        const li = e.target.parentElement;
+        list.removeChild(li);
+    }
+});
+
 
 //add books
-
 const addForm = document.forms["add-book"];
 addForm.addEventListener("submit", function(e){
     e.preventDefault(); 
     const value = addForm.querySelector('input[type="text"]').value;
-    console.log(value);
+
+    //create elements
+    const li = document.createElement("li");
+    const bookName = document.createElement("span");
+    const deleteBtn = document.createElement("span");
+
+    //add content
+    /*adds class*/ deleteBtn.className = "delete";
+    /*adds text inside span*/deleteBtn.textContent = "delete";
+    /*adds class*/bookName.classList.add ("name");
+    /*adds text inside span*/bookName.textContent = value;
+    //adds styles li.style.marginTop = "60px";
+
+    //append to DOM
+    li.appendChild(bookName);
+    li.appendChild(deleteBtn);
+    list.appendChild(li);
+
+
+/* changing attributes of elements
+    book.getAttribute("class");
+    book.setAttribute("class", "name-2");
+    book.hasAttribute("class");
+    book.removeAttribute('class'); */
 });
+
